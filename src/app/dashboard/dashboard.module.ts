@@ -6,9 +6,9 @@ import { SidebarComponent } from './shared-components/sidebar/sidebar.component'
 import { FooterComponent } from './shared-components/footer/footer.component';
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { TasksComponent } from './tasks/tasks.component';
+import { TasksComponent } from './dashboard-home/tasks/tasks.component';
 import { FormsModule } from '@angular/forms';
-import { StatsComponent } from './stats/stats.component';
+import { StatsComponent } from './dashboard-home/stats/stats.component';
 
 @NgModule({
   imports: [

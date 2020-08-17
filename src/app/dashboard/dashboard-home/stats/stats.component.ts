@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as Chart from 'chart.js';
-import { colorCodes } from './../../shared/config/colorCodes';
+import { colorCodes } from './../../../shared/config/colorCodes';
 
 @Component({
   selector: 'app-stats',
