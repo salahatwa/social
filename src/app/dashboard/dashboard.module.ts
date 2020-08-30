@@ -9,12 +9,14 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { TasksComponent } from './dashboard-home/tasks/tasks.component';
 import { FormsModule } from '@angular/forms';
 import { StatsComponent } from './dashboard-home/stats/stats.component';
+import { ProviderComponent } from './provider/provider.component';
+import { SharedModule } from './../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    SharedModule
   ],
   declarations: [
     NavbarComponent,
@@ -23,7 +25,9 @@ import { StatsComponent } from './dashboard-home/stats/stats.component';
     DashboardComponent,
     DashboardHomeComponent,
     TasksComponent,
-    StatsComponent
-  ]
+    StatsComponent,
+    ProviderComponent
+  ],
+  exports:[SharedModule]
 })
 export class DashboardModule { }

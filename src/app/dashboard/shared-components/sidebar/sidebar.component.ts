@@ -1,17 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonService } from './../../../shared/services/common.service';
+import { User } from './../../../shared/models/models';
+import { UserService } from './../../../shared/services/user.service';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
 
-  constructor(public cmnSrv: CommonService) { }
+  currentUser: User;
+
+  constructor(public cmnSrv: CommonService, private userService: UserService) { }
+  ngOnInit() {
+    this.userService.currentUser.subscribe((user) => {
+      this.currentUser = user;
+    });
+  }
 
   sidebarItems = [
-    { link: '/', label: 'Dashboard', icon: 'dashboard' },
+    { link: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
+    { link: '/dashboard/social-account', label: 'Accounts', icon: 'dashboard' },
+    
     {
       label: 'Components', icon: 'apps', subItem: [
         { link: '/components/buttons', label: 'buttons', icon: 'b' },

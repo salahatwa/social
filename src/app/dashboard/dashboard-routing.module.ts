@@ -2,12 +2,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
+import { ProviderComponent } from './../dashboard/provider/provider.component';
 
 const routes: Routes = [
   {
-    path: '', component: DashboardComponent,
+    path: '', 
+    component: DashboardComponent,
     children: [
       { path: '', component: DashboardHomeComponent },
+      { path: 'social-account', component: ProviderComponent },
+      
       // { path: 'components', loadChildren: '../components/components.module#ComponentsModule' },
       // { path: 'forms', loadChildren: '../forms/forms.module#FormsLocalModule' },
       // { path: 'tables', loadChildren: '../tables/tables.module#TablesModule' },

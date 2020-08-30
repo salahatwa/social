@@ -23,17 +23,29 @@
     <div class="card shadow auth-forms" [ngClass]="toggleFormClass">
       <!-- login form -->
       <div class="auth-login">
+        <alert class="row"></alert>
         <div class="wrapper">
           <h2 class="mb-4 text-primary">Login</h2>
-          <form>
+          <form [formGroup]="authForm">
             <div class="form-group">
-              <input type="email" class="form-control" placeholder="Email" required autofocus />
+              <input type="email" class="form-control" formControlName="username" placeholder="Email" required autofocus />
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" placeholder="Password" required />
+              <input type="password" class="form-control" formControlName="password" placeholder="Password" required />
             </div>
             <div class="form-group">
-              <button type="submit" class="btn px-4 btn-primary" (click)="onLogin()">Log In</button>
+              <button type="submit" class="btn px-4 btn-primary" [class.spinner]="isSubmitting"
+              [disabled]="!authForm.valid||isSubmitting" (click)="login()">Log In</button>
+           
+              <button class="btn px-4 btn-social btn-twitter" [disabled]="isSubmitting" [class.spinner]="isSubmitting" (click)="twitterLogin()">
+                <span class="fa fa-twitter"></span> Sign in with Twitter
+              </button>
+
+              <button class="btn px-4 btn-social btn-linkedin" [disabled]="isSubmitting" [class.spinner]="isSubmitting" (click)="linkedLogin()">
+                <span class="fa fa-linkedin"></span> Sign in with LinkIn
+              </button>
+
+              
             </div>
           </form>
         </div>

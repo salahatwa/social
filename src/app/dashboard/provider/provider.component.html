@@ -1,0 +1,44 @@
+<h2 class="heading text-center">Smart Table</h2>
+
+<h5 class="mt-4">Smart Table
+
+  <button class="btn px-4 btn-social btn-twitter" [disabled]="isSubmitting" [class.spinner]="isSubmitting" (click)="twitterLogin()">
+    <span class="fa fa-twitter"></span> Sign in with Twitter
+  </button>
+
+  <button class="btn px-4 btn-social btn-linkedin" [disabled]="isSubmitting" [class.spinner]="isSubmitting" (click)="linkedLogin()">
+    <span class="fa fa-linkedin"></span> Sign in with LinkIn
+  </button>
+  
+</h5>
+<div class="card">
+  <div class="card-body">
+      <table id="data_table"   class="display table responsive no-wrap">
+
+        <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Type</th>
+              <th scope="col">Created At</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let provider of providers;let i=index;">
+              <th scope="row">{{provider.name}}</th>
+              <td>{{provider.providerType}}</td>
+              <td>{{provider.createdAt}}</td>
+              <td>
+                <button class="btn  btn-just-icon btn-round btn-light" (click)="removeProvider(provider?.id,i)"><i class="material-icons">delete</i></button>
+              </td>
+            </tr>
+           
+          </tbody>
+      </table>
+  </div>
+</div>
+<p class="d-block text-right text-muted"> for more info:
+  <a href="http://l-lin.github.io/angular-datatables/" target="_blank">Angular Datatables
+    <i class="material-icons" style="font-size: .9rem">launch</i>
+  </a>
+</p>

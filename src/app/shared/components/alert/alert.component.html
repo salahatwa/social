@@ -1,0 +1,13 @@
+<div class="col-md-12 clearfix">
+    <div *ngFor="let alert of alerts" class="{{cssClass(alert)}}" class="alert alert-dismissible fade show mb-0 mt-4"
+        role="alert">
+        <i-feather *ngIf="alert.type===alertType.Success" name="check-circle" class="mr-2" stroke-width="2">
+        </i-feather>
+        <i-feather *ngIf="alert.type===alertType.Error" name="x-octagon" class=" mr-2" stroke-width="2">
+        </i-feather>
+        {{alert.message}}
+        <button type="button" (click)="removeAlert(alert)" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>

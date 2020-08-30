@@ -5,7 +5,7 @@
   <div class="navbar-brand">
     <a>
         <!-- <img class="brandImg" src="http://via.placeholder.com/60x60" alt="brandImg"> -->
-      ANGULAR ADMIN
+      {{currentUser?.profile?.name}}
     </a>
   </div>
   
@@ -26,6 +26,6 @@
       </form>
     </li>
     <li class="nav-item"><i class="material-icons">notifications</i></li>
-    <li class="nav-item"><i class="material-icons">person</i></li>
+    <li class="nav-item"><img class="userImg" src="{{currentUser?.profile?.image}}"></li>
   </ul>
 </nav>

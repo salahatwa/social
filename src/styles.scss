@@ -253,3 +253,35 @@ i.material-icons {
     padding-left:2rem;
   }
 }
+
+/**
+* custom loading spinner button
+*/
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner:before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  // top: 50%;
+  // left: 50%;
+  // right:50%;
+  width: 25px;
+  height: 25px;
+  margin: auto;
+  z-index: 9999;
+  // margin-bottom: -20px;
+  // margin-right: 5px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #000000;
+  animation: spinner 0.8s linear infinite;
+}
+
+/**
+* End custom spinner
+*/

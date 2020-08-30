@@ -1,14 +1,17 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { NgModule } from '@angular/core';
+import { SharedModule } from './../shared/shared.module';
 import { AuthComponent } from './auth/auth.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { PagesRoutingModule } from './pages-routing.module';
+import { LoadingComponent } from './loading/loading.component';
+import { SecureLoadingComponent } from './../pages/secure-loading/secure-loading.component';
 
 @NgModule({
   imports: [
-    CommonModule,
+    SharedModule,
     PagesRoutingModule
   ],
-  declarations: [NotFoundComponent, AuthComponent]
+  declarations: [NotFoundComponent, AuthComponent, LoadingComponent,SecureLoadingComponent]
 })
 export class PagesModule { }
