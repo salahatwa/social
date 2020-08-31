@@ -1,0 +1,59 @@
+<div class="modal-header">
+  <h4 class="modal-title">Select Account!</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+
+  <button class="btn m-3 btn-outline-success rounded-circle btn-just-icon" (click)="testPost()"><i class="material-icons">send</i>Social Post</button>
+
+  <!-- [checked]="data.check" -->
+  <div *ngFor="let provider of providers;let i = index" class="row py-4">
+    <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3">
+      <img src="{{provider.image}}" alt="Scott Stevens" class=" img-fluid  rounded " width="50px" height="50px" />
+    </div>
+    <div class="col-lg-1 col-md-1 col-xs-1 col-sm-1 justify-content-center align-self-center">
+      <label style="display:inline-block;font-weight:  bolder;" for="{{'provider' + i}}">
+        <span
+          [ngClass]="{'fa fa-linkedin':provider.providerType==='LINKEDIN','fa fa-twitter':provider.providerType==='TWITTER'}"></span>
+      </label>
+    </div>
+
+    <div class="col-lg-5 col-md-4 col-xs-4 col-sm-4 justify-content-center align-self-center">
+      <label style="display:inline-block;font-weight:  bolder;" for="{{'provider' + i}}"> {{provider.name}}</label>
+    </div>
+
+    <ng-container class="col-lg-3 col-md-4 col-xs-4 col-sm-4  justify-content-center align-self-center" 
+    *ngTemplateOutlet="(selectedProvidersIds?.length>0)?checkSelectedTemp:addTemplate;context:{provider: provider}"  >
+    
+    </ng-container>
+
+
+  </div>
+
+  <ng-template #checkSelectedTemp let-provider="provider">
+    <div class="custom-control custom-checkbox col-lg-3 col-md-4 col-xs-4 col-sm-4  justify-content-center align-self-center">
+      <ng-container *ngTemplateOutlet="isSelectedProvider(provider?.id)?removeTemplate:addTemplate;context:{provider: provider}" >
+      </ng-container>
+    </div>
+  </ng-template>
+
+  <ng-template #addTemplate let-provider="provider">
+    <button class="btn m-3 btn-outline-success rounded-circle btn-just-icon" (click)="addProvider(provider)"><i class="material-icons">add</i></button>
+  </ng-template>
+
+  <ng-template #removeTemplate let-provider="provider">
+    <button class="btn m-3 btn-outline-danger rounded-circle btn-just-icon" (click)="removeProvider(provider)"><i class="material-icons">remove</i></button>
+  </ng-template>
+
+
+  <div *ngIf="totalElements!==0" class="col text-center">
+    <button class="btn btn-default" (click)="loadMore()">load more</button>
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>

@@ -3,7 +3,8 @@ import { ProviderService } from './../../shared/services/provider.service';
 import { UtilService } from './../../shared/services/util.service';
 import { UserService } from './../../shared/services/user.service';
 import { AlertService } from './../../shared/components/alert/alert.service';
-import { ProviderDto } from './../../shared/models/models';
+import { ProviderDto, PageProviderDto } from './../../shared/models/models';
+import { Constant } from './../../shared/utils/constant';
 
 @Component({
   selector: 'app-provider',
@@ -12,23 +13,40 @@ import { ProviderDto } from './../../shared/models/models';
 })
 export class ProviderComponent implements OnInit {
 
+  pageConfig = {
+    itemsPerPage: Constant.PAGINATION_MAX_RECS,
+    currentPage: 1,
+    totalItems: 0
+  };
   isSubmitting: boolean = false;
-  providers: ProviderDto[];
+  pageProvider: PageProviderDto;
 
   constructor(private providerService: ProviderService, private utilService: UtilService,
     private userService: UserService, private alertService: AlertService) { }
 
   ngOnInit(): void {
-    this.providerService.getUserProviderList().subscribe(data => {
-      console.log(data);
-      this.providers = data;
+    this.loadProvider();
+  }
+
+
+  loadProvider(pageNo?: number) {
+    this.providerService.getUserProviderList(pageNo).subscribe(data => {
+      this.pageProvider = data;
+      this.pageConfig.totalItems = data.totalElements;
     },
       err => {
         console.log(err);
       });
   }
 
+  pageChanged(event) {
 
+    // this.isLoading = true;
+
+    this.pageConfig.currentPage = event - 1;
+    this.loadProvider(this.pageConfig.currentPage);
+
+  }
 
   twitterLogin() {
     this.isSubmitting = true;
@@ -67,7 +85,7 @@ export class ProviderComponent implements OnInit {
 
   removeProvider(id: string, index: number) {
     this.providerService.removeProviderById(id).subscribe((data) => {
-      this.providers.splice(index, 1);
+      this.pageProvider.providers.splice(index, 1);
       console.log("Done delete");
     });
   }

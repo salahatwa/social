@@ -11,6 +11,10 @@ import { FormsModule } from '@angular/forms';
 import { StatsComponent } from './dashboard-home/stats/stats.component';
 import { ProviderComponent } from './provider/provider.component';
 import { SharedModule } from './../shared/shared.module';
+import { PostListComponent } from './post/post-list.component';
+import { PostComponent } from './post/post/post.component';
+import { PaginationModule } from './../shared/components/pagination/pagination.module';
+import { ProviderListComponent } from './post/post/provider-list/provider-list.component';
 
 @NgModule({
   imports: [
@@ -26,7 +30,10 @@ import { SharedModule } from './../shared/shared.module';
     DashboardHomeComponent,
     TasksComponent,
     StatsComponent,
-    ProviderComponent
+    ProviderComponent,
+    PostListComponent,
+    PostComponent,
+    ProviderListComponent
   ],
   exports:[SharedModule]
 })

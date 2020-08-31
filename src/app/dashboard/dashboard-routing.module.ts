@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
 import { ProviderComponent } from './../dashboard/provider/provider.component';
+import { PostListComponent } from './post/post-list.component';
+import { PostComponent } from './../dashboard/post/post/post.component';
 
 const routes: Routes = [
   {
@@ -11,6 +13,8 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardHomeComponent },
       { path: 'social-account', component: ProviderComponent },
+      { path: 'posts', component: PostListComponent },
+      { path: 'post/:id', component: PostComponent },
       
       // { path: 'components', loadChildren: '../components/components.module#ComponentsModule' },
       // { path: 'forms', loadChildren: '../forms/forms.module#FormsLocalModule' },

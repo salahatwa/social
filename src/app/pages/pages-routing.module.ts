@@ -6,12 +6,12 @@ import { LoadingComponent } from './../pages/loading/loading.component';
 import { SecureLoadingComponent } from './../pages/secure-loading/secure-loading.component';
 
 const routes: Routes = [
-  { path: 'notfound', component: NotFoundComponent ,pathMatch: 'prefix'},
+  { path: 'notfound', component: NotFoundComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'loading', component: LoadingComponent },
   { path: 'secure_loading', component: SecureLoadingComponent },
   
-  // { path: '**', component: NotFoundComponent }
+  // { path: '**', redirectTo: 'notfound' }
 ];
 
 @NgModule({

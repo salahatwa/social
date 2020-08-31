@@ -5,6 +5,8 @@ import { RouterModule } from '@angular/router';
 import { AlertModule } from './components/alert/alert.module';
 import { AuthModule } from './services/auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
+import { PaginationModule } from './components/pagination/pagination.module';
+import { NgbModalModule } from './components/modal/modal.module';
 
 @NgModule({
   imports: [
@@ -14,7 +16,9 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule,
     AlertModule,
-    AuthModule
+    AuthModule,
+    PaginationModule,
+    NgbModalModule
   ],
   declarations: [
   ],
@@ -25,7 +29,9 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     AlertModule,
-    AuthModule
+    AuthModule,
+    PaginationModule,
+    NgbModalModule
   ],
   entryComponents: [
   ]

@@ -5,9 +5,9 @@ import {NoAuthGuard} from './shared/services/auth/no-auth-guard.service';
 ///pages/auth
 const routes: Routes = [
   { path: '', redirectTo:"dashboard" ,pathMatch:"full"},
-  { path: '', loadChildren: () => import(`./pages/pages.module`).then(m => m.PagesModule),canActivate:[NoAuthGuard]},
+  { path: '', loadChildren: () => import(`./pages/pages.module`).then(m => m.PagesModule),},
   { path: 'dashboard', loadChildren: () => import(`./dashboard/dashboard.module`).then(m => m.DashboardModule),canActivate:[AuthGuard]}
-
+  ,{path: '**', redirectTo: 'notfound'}
 ];
 
 @NgModule({

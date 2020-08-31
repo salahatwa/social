@@ -1,3 +1,9 @@
+
+export interface PageProviderDto {
+    providers?: ProviderDto[];
+    totalElements?: number;
+}
+
 export interface ProviderDto { 
     createdAt?: Date;
     description?: string;

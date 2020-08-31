@@ -1,0 +1,61 @@
+<h2 class="heading text-center">Smart Table</h2>
+
+<h5 class="mt-4">Smart Table
+
+  <a class="btn px-4"  [class.spinner]="isSubmitting" [routerLink]="['/dashboard/post/new']">
+    <span class="fa fa-plus"></span> Add
+  </a>
+
+  
+</h5>
+
+
+<div class="card">
+  <div class="card-body">
+      <table id="data_table" class="display table responsive no-wrap">
+
+        <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Scheduled</th>
+              <th scope="col">Executed</th>
+              <th>Error</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let task of pageTask?.tasks | paginate: pageConfig;let i=index">
+              <th scope="row">{{task.id}}</th>
+              <td>{{task.scheduled}}</td>
+              <td>{{task.executed}}</td>
+              <th>{{task.error}}</th>
+              <td>
+                <!-- <button class="btn  btn-just-icon btn-round btn-light" ><i class="material-icons">delete</i></button> -->
+                <a [routerLink]="['/dashboard/post/',task.id]">
+                  <i class="material-icons">edit</i>
+                </a>
+
+                <button class="btn  btn-just-icon btn-round btn-light" (click)="deleteTask(task?.id,i)"><i class="material-icons">delete</i></button>
+
+                
+              </td>
+            </tr>
+           
+          </tbody>
+      </table>
+
+      <ngb-pagination class="d-flex justify-content-center"
+
+        [collectionSize]="pageConfig.totalItems" [maxSize]="pageConfig.itemsPerPage" [pageSize]="pageConfig.itemsPerPage"
+
+        (pageChange)="pageChanged($event)" [(page)]="pageConfig.currentPage" aria-label="Default pagination">
+
+      </ngb-pagination>
+      
+  </div>
+</div>
+<p class="d-block text-right text-muted"> for more info:
+  <a href="http://l-lin.github.io/angular-datatables/" target="_blank">Angular Datatables
+    <i class="material-icons" style="font-size: .9rem">launch</i>
+  </a>
+</p>
