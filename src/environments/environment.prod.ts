@@ -3,7 +3,7 @@ const { name, description, version } = require('../../package.json');
 
 export const environment = {
   production: true,
-  api: 'http://localhost:8080/socialty/api/v1',
+  api: 'http://mbootx.herokuapp.com/socialty/api/v1',
   name,
   description,
   version,

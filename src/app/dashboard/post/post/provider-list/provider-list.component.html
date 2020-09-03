@@ -6,7 +6,7 @@
 </div>
 <div class="modal-body">
 
-  <button class="btn m-3 btn-outline-success rounded-circle btn-just-icon" (click)="testPost()"><i class="material-icons">send</i>Social Post</button>
+  <button class="btn m-3 btn-outline-success rounded-circle btn-just-icon" (click)="testPost()"><i class="material-icons">send</i></button>
 
   <!-- [checked]="data.check" -->
   <div *ngFor="let provider of providers;let i = index" class="row py-4">
@@ -15,8 +15,8 @@
     </div>
     <div class="col-lg-1 col-md-1 col-xs-1 col-sm-1 justify-content-center align-self-center">
       <label style="display:inline-block;font-weight:  bolder;" for="{{'provider' + i}}">
-        <span
-          [ngClass]="{'fa fa-linkedin':provider.providerType==='LINKEDIN','fa fa-twitter':provider.providerType==='TWITTER'}"></span>
+        <span class="fa "
+          [ngClass]="{'fa-linkedin':provider.providerType==='LINKEDIN','fa-twitter':provider.providerType==='TWITTER'}"></span>
       </label>
     </div>
 

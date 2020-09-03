@@ -7,6 +7,7 @@ import { AuthModule } from './services/auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
 import { PaginationModule } from './components/pagination/pagination.module';
 import { NgbModalModule } from './components/modal/modal.module';
+import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { NgbModalModule } from './components/modal/modal.module';
     AlertModule,
     AuthModule,
     PaginationModule,
-    NgbModalModule
+    NgbModalModule,
+    Ng2FlatpickrModule
   ],
   declarations: [
   ],
@@ -31,7 +33,8 @@ import { NgbModalModule } from './components/modal/modal.module';
     AlertModule,
     AuthModule,
     PaginationModule,
-    NgbModalModule
+    NgbModalModule,
+    Ng2FlatpickrModule
   ],
   entryComponents: [
   ]

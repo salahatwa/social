@@ -4,30 +4,70 @@
 <div class="row">
     <div class="col-xl">
         <h6>Default</h6>
+
+
         <div class="card">
             <div class="card-body">
 
-                <button class="btn btn-lg btn-outline-primary" (click)="open()">Launch demo modal</button>
-  
-                
-                <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+                <alert class="row" [id]="alert.id"></alert>
+
+                <form [formGroup]="postForm">
+
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <button class="btn btn-lg btn-outline-primary" (click)="open()">Select Accounts</button>
+                        </div>
+                    </div>
+
+
                     <div class="form-group">
-                        <label>Content</label>
-                        <input type="text" formControlName="content" class="form-control"
-                            [ngClass]="{ 'is-invalid': isSubmitting && f.content.errors }" />
+                        <label for="content">Content</label>
+                        <textarea #content formControlName="content" class="form-control"
+                            [ngClass]="{ 'is-invalid': isSubmitting && f.content.errors }" rows="6" cols="70"
+                            maxlength="250"></textarea>
+
                         <div *ngIf="isSubmitting && f.content.errors" class="invalid-feedback">
                             <div *ngIf="f.content.errors.required">Content is required</div>
                         </div>
                     </div>
-                  
-                    <div class="form-group">
-                        <button class="btn btn-primary">Register</button>
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="date">Date</label>
+                            <!-- <input [flatpickr]="date"  formControlName="date" placeholder="Date"/> -->
+                            <input [flatpickr]="dateTimeOptions" formControlName="dateTime" placeholder="Date" />
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="date">Timezone Offset</label>
+                            <!-- <input [flatpickr]="date"  formControlName="date" placeholder="Date"/> -->
+                            <input type="number" class="form-control" formControlName="timezoneOffset" placeholder="TimezoneOffset" />
+                        </div>
+
+                        <div class="form-group col-md-3">
+
+                            <label for="time">Enable</label>
+                            <!-- Default switch -->
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="customSwitches" formControlName="enabled" >
+                                <label class="custom-control-label" for="customSwitches">Enable schedular</label>
+                            </div>
+                        </div>
                     </div>
+
+
+
+
+
+                    <button type="submit" class="btn btn-primary" (click)="onSubmit()">Save</button>
+
+
                 </form>
             </div>
         </div>
 
-       
+
     </div>
 
 </div>
