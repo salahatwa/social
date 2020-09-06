@@ -16,12 +16,19 @@ export class AuthComponent implements OnInit {
 
   isSubmitting = false;
   authForm: FormGroup;
+  signUpForm: FormGroup;
 
   constructor(private router: Router, private utilService: UtilService, private fb: FormBuilder, private userService: UserService, private alertService: AlertService) { }
 
   ngOnInit() {
     this.authForm = this.fb.group({
       'username': ['', Validators.required],
+      'password': ['', Validators.required]
+    });
+
+    this.signUpForm = this.fb.group({
+      'name': ['', Validators.required],
+      'email': ['', Validators.required],
       'password': ['', Validators.required]
     });
   }
@@ -36,6 +43,7 @@ export class AuthComponent implements OnInit {
 
   login() {
     this.isSubmitting = true;
+    console.log(this.authForm.value);
     this.userService
       .attemptAuth(this.authForm.value)
       .subscribe(
@@ -44,7 +52,6 @@ export class AuthComponent implements OnInit {
           this.isSubmitting = false;
         },
         err => {
-          console.error(err);
           this.isSubmitting = false;
           this.alertService.error(err.message);
         }
@@ -68,8 +75,7 @@ export class AuthComponent implements OnInit {
       );
   }
 
-  linkedLogin()
-  {
+  linkedLogin() {
     this.isSubmitting = true;
     this.userService
       .initLinkedIn('/auth/linkedIn/init')
@@ -87,5 +93,21 @@ export class AuthComponent implements OnInit {
   }
 
 
+  signup() {
+    this.isSubmitting = true;
+    this.userService
+      .signUp(this.signUpForm.value)
+      .subscribe(
+        data => {
+          this.router.navigate(['/dashboard']);
+          this.isSubmitting = false;
+        },
+        err => {
+          console.error(err);
+          this.isSubmitting = false;
+          this.alertService.error(err.message);
+        }
+      );
+  }
 
 }

@@ -54,18 +54,18 @@
       <div class="auth-signup">
         <div class="wrapper">
           <h2 class="mb-4 text-primary">Sign Up</h2>
-          <form class="forms_form">
+          <form [formGroup]="signUpForm" class="forms_form">
             <div class="form-group">
-              <input type="text" placeholder="Full Name" class="form-control" required />
+              <input type="text" formControlName="name" placeholder="Full Name" class="form-control" required />
             </div>
             <div class="form-group">
-              <input type="email" placeholder="Email" class="form-control" required />
+              <input type="email" formControlName="email" placeholder="Email" class="form-control" required />
             </div>
             <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control" required />
+              <input type="password" formControlName="password" placeholder="Password" class="form-control" required />
             </div>
             <div class="form-group">
-              <button type="submit" class="btn btn-primary px-4">Sign Up</button>
+              <button type="submit" class="btn btn-primary px-4" [disabled]="isSubmitting" [class.spinner]="isSubmitting" (click)="signup()">Sign Up</button>
             </div>
           </form>
         </div>

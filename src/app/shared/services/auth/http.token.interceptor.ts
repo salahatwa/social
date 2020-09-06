@@ -30,10 +30,9 @@ export class HttpTokenInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError(
         (err, caught) => {
-
           if (err.status === 401) {
             this.handleAuthError();
-            return of(err);
+            throw err;
           } else if (err.status == 0) {
             err.error = {
               message: "Server not reachable"

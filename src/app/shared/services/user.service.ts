@@ -34,7 +34,6 @@ export class UserService {
       this.apiService.get('/auth/me')
         .subscribe(
           data => {this.setAuth(data);
-          // this.router.navigate(["/dashboard"])
         },
           err => {
             this.purgeAuth();
@@ -64,8 +63,18 @@ export class UserService {
     this.isAuthenticatedSubject.next(false);
   }
 
-  attemptAuth(credentials): Observable<User> {
+  attemptAuth(credentials): Observable<any> {
     return this.apiService.post('/auth/login', credentials)
+      .pipe(map(
+        data => {
+          this.setAuth(data);
+          return data;
+        }
+      ));
+  }
+
+  signUp(credentials): Observable<User> {
+    return this.apiService.post('/auth/signup', credentials)
       .pipe(map(
         data => {
           this.setAuth(data);
