@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonService } from './../../../shared/services/common.service';
 import { User } from './../../../shared/models/models';
 import { UserService } from './../../../shared/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,18 +13,24 @@ export class SidebarComponent implements OnInit {
 
   currentUser: User;
 
-  constructor(public cmnSrv: CommonService, private userService: UserService) { }
+  constructor(public cmnSrv: CommonService, private userService: UserService, private router: Router) { }
+
   ngOnInit() {
     this.userService.currentUser.subscribe((user) => {
       this.currentUser = user;
     });
   }
 
+  logout() {
+    this.userService.purgeAuth();
+    this.router.navigate(['/auth']);
+  }
+
   sidebarItems = [
     { link: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
     { link: '/dashboard/social-account', label: 'Accounts', icon: 'dashboard' },
     { link: '/dashboard/posts', label: 'Posts', icon: 'date_range' },
-    
+
     // {
     //   label: 'Components', icon: 'apps', subItem: [
     //     { link: '/post/publish', label: 'buttons', icon: 'b' },

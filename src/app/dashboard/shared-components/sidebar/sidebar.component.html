@@ -1,7 +1,15 @@
 <div class="sidebar"  [class.hide]="cmnSrv.dashboardState.sidebarToggle">
   <div class="sidebar-header align-middle">
     <!-- <img class="brandImg" src="http://via.placeholder.com/60x60" alt="brandImg"> -->
-    <span class="text-uppercase p-3">ad</span>
+    <span class="text-uppercase p-3">
+      
+      <a (click)="logout()" class="signout float-left" style="cursor: pointer;">
+
+        <span class="material-icons">logout</span>
+
+      </a>
+
+    </span>
     <strong class="heading text-uppercase d-inline-block mini-hide"> {{currentUser?.profile?.name}}</strong>
   </div>
   <hr class="underline"> 

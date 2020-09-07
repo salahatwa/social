@@ -312,3 +312,19 @@ input.rounded-border {
 /**
 * End custom spinner
 */
+.signout {
+  color: #fff !important;
+  padding: 0.3rem 0.3rem;
+  border-radius: 0px;
+  background-color: #f93f02;
+  position: relative;
+  border-radius: 10px;
+}
+
+.signout:hover {
+  color: #fff !important;
+
+  background-color: #dc3545;
+
+  border-color: #dc3545;
+}
