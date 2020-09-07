@@ -15,6 +15,7 @@ import { PostListComponent } from './post/post-list.component';
 import { PostComponent } from './post/post/post.component';
 import { PaginationModule } from './../shared/components/pagination/pagination.module';
 import { ProviderListComponent } from './post/post/provider-list/provider-list.component';
+import { TaskConfirmationDialogComponent } from './post/post/task-confirmation-create/task-confirmation-dialog.component';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { ProviderListComponent } from './post/post/provider-list/provider-list.c
     ProviderComponent,
     PostListComponent,
     PostComponent,
-    ProviderListComponent
+    ProviderListComponent,
+    TaskConfirmationDialogComponent
   ],
   exports:[SharedModule]
 })

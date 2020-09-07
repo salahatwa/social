@@ -5,6 +5,7 @@ import { UserService } from './../../shared/services/user.service';
 import { AlertService } from './../../shared/components/alert/alert.service';
 import { ProviderDto, PageProviderDto } from './../../shared/models/models';
 import { Constant } from './../../shared/utils/constant';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-provider',
@@ -20,6 +21,7 @@ export class ProviderComponent implements OnInit {
   };
   isSubmitting: boolean = false;
   pageProvider: PageProviderDto;
+  isLoading: boolean;
 
   constructor(private providerService: ProviderService, private utilService: UtilService,
     private userService: UserService, private alertService: AlertService) { }
@@ -30,7 +32,11 @@ export class ProviderComponent implements OnInit {
 
 
   loadProvider(pageNo?: number) {
-    this.providerService.getUserProviderList(pageNo).subscribe(data => {
+    this.isLoading = true;
+
+    this.providerService.getUserProviderList(pageNo).pipe(finalize(() => {
+      this.isLoading = false;
+    })).subscribe(data => {
       this.pageProvider = data;
       this.pageConfig.totalItems = data.totalElements;
     },

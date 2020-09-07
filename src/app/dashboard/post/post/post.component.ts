@@ -8,6 +8,8 @@ import { ProviderListComponent } from './../post/provider-list/provider-list.com
 import { FlatpickrOptions } from 'ng2-flatpickr';
 import { formatDate } from '@angular/common';
 import { AlertService } from './../../../shared/components/alert/alert.service';
+import { TaskConfirmationDialogComponent } from './task-confirmation-create/task-confirmation-dialog.component';
+import { of } from 'rxjs';
 
 export interface DateTime {
   date: string;
@@ -52,7 +54,7 @@ export class PostComponent implements OnInit {
       content: ['', Validators.required],
       dateTime: [formatDate(Date.now(), 'yyyy-MM-dd HH:mm', 'en-US'), Validators.required],
       enabled: [false, Validators.required],
-      timezoneOffset:[0]
+      timezoneOffset: [0]
     });
 
     if (taskId) {
@@ -66,7 +68,7 @@ export class PostComponent implements OnInit {
             content: [this.task.content, Validators.required],
             dateTime: [this.task.date + " " + this.task.time, Validators.required],
             enabled: [this.task.enabled, Validators.required],
-            timezoneOffset:[this.task.timezoneOffset]
+            timezoneOffset: [this.task.timezoneOffset]
           });
 
 
@@ -79,7 +81,7 @@ export class PostComponent implements OnInit {
           content: ['', Validators.required],
           dateTime: [formatDate(Date.now(), 'yyyy-MM-dd HH:mm', 'en-US'), Validators.required],
           enabled: [false, Validators.required],
-          timezoneOffset:[0]
+          timezoneOffset: [0]
         });
       }
 
@@ -97,30 +99,7 @@ export class PostComponent implements OnInit {
   get f() { return this.postForm.controls; }
 
   onSubmit() {
-    this.isSubmitting = true;
-
-    // this.postForm.date
-    // console.log(this.postForm?.value);
-
-    // stop here if form is invalid
-    if (this.postForm.invalid) {
-      return;
-    }
-
-
-    Object.assign(this.task, this.postForm?.value);
-    // this.omit(this.task, 'dateTime');
-
-
-    this.task.date = formatDate(this.f['dateTime'].value, 'yyyy-MM-dd', 'en-US');
-    this.task.time = formatDate(this.f['dateTime'].value, 'HH:mm', 'en-US');
-
-
-    // Object.assign(this.task, this.dateTimeObj);
-    // console.log(this.dateTimeObj.date);
-    console.log(this.task);
-
-    this.taskService.saveTask(this.task).subscribe((data => {
+    this.saveTask().subscribe((data => {
       this.task = data;
       this.alertService.success("Success created task", this.alert);
     }), err => {
@@ -129,18 +108,51 @@ export class PostComponent implements OnInit {
     });
   }
 
+  saveTask() {
+    this.isSubmitting = true;
+    // stop here if form is invalid
+    if (this.postForm.invalid) {
+      return of();
+    }
 
-  omit(obj, omitKey) {
-    return Object.keys(obj).reduce((result, key) => {
-      if (key !== omitKey) {
-        result[key] = obj[key];
-      }
-      return result;
-    }, {});
+
+    Object.assign(this.task, this.postForm?.value);
+
+
+    this.task.date = formatDate(this.f['dateTime'].value, 'yyyy-MM-dd', 'en-US');
+    this.task.time = formatDate(this.f['dateTime'].value, 'HH:mm', 'en-US');
+
+    return this.taskService.saveTask(this.task);
   }
 
+  selectAccounts() {
 
-  open() {
+    if (this.task && this.task.id) {
+      this.openSelectProvidersDialog();
+    } else {
+      const modalRef = this.modalService.open(TaskConfirmationDialogComponent, { scrollable: true });
+
+      modalRef.result.then((userResponse) => {
+        console.log(`User's choice: ${userResponse}`);
+
+        this.saveTask().subscribe((data => {
+          this.task = data;
+          this.alertService.success("Success created task", this.alert);
+          this.openSelectProvidersDialog();
+        }), err => {
+          console.log(err);
+          this.alertService.error(err.msg, this.alert);
+        });
+
+
+      }).catch((error)=>{
+
+      });
+
+    }
+  }
+
+  openSelectProvidersDialog() {
     const modalRef = this.modalService.open(ProviderListComponent, { scrollable: true });
     modalRef.componentInstance.selectedProvidersIds = this.task.providersId;
     modalRef.componentInstance.task = this.task;

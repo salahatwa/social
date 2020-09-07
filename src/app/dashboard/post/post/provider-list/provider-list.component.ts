@@ -3,6 +3,7 @@ import { NgbActiveModal } from './../../../../shared/components/modal/dialog';
 import { ProviderDto, TaskDto } from './../../../../shared/models/models';
 import { ProviderService } from './../../../../shared/services/provider.service';
 import { TaskService } from './../../../../shared/services/task.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-provider-list',
@@ -44,26 +45,32 @@ export class ProviderListComponent implements OnInit {
     this.loadProvider(this.pageNo);
   }
 
-isSelectedProvider(id:string):boolean{
-  const index: number = this.selectedProvidersIds.indexOf(id);
-  if (index !== -1) {
-    return true;
+  isSelectedProvider(id: string): boolean {
+    const index: number = this.selectedProvidersIds.indexOf(id);
+    if (index !== -1) {
+      return true;
+    }
+    return false;
   }
-  return false;
-}
 
   addProvider(provider: ProviderDto) {
-    this.taskService.addProviderToTask(this.task.id, provider.id).subscribe(data => {
-      this.selectedProvidersIds.push(provider.id);
-      console.log(this.selectedProvidersIds);
+    this.isSubmitting = true;
+
+    this.taskService.addProviderToTask(this.task.id, provider.id).pipe(finalize(() => {
+      this.isSubmitting = false;
+    })).subscribe(data => {
+      this.selectedProvidersIds.push(provider?.id);
+
+    }, err => {
+
     });
   }
 
   removeProvider(provider: ProviderDto) {
-
-    this.taskService.removeProviderToTask(this.task.id, provider.id).subscribe(data => {
-      // this.selectedProvidersIds.splice(provider.id);
-
+    this.isSubmitting = true;
+    this.taskService.removeProviderToTask(this.task.id, provider.id).pipe(finalize(() => {
+      this.isSubmitting = false;
+    })).subscribe(data => {
       const index: number = this.selectedProvidersIds.indexOf(provider.id);
       if (index !== -1) {
         this.selectedProvidersIds.splice(index, 1);
@@ -72,8 +79,11 @@ isSelectedProvider(id:string):boolean{
     });
   }
 
-  testPost(){
-    this.taskService.testPostTask(this.task.id).subscribe(data=>{
+  publishPost() {
+    this.isSubmitting = true;
+    this.taskService.testPostTask(this.task.id).pipe(finalize(() => {
+      this.isSubmitting = false;
+    })).subscribe(data => {
       console.log(data)
     });
   }
