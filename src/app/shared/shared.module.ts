@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PaginationModule } from './components/pagination/pagination.module';
 import { NgbModalModule } from './components/modal/modal.module';
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
+import {TimeAgoModule} from './pipe/time-ago.module';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { Ng2FlatpickrModule } from 'ng2-flatpickr';
     AuthModule,
     PaginationModule,
     NgbModalModule,
-    Ng2FlatpickrModule
+    Ng2FlatpickrModule,
+    TimeAgoModule
   ],
   declarations: [
   ],
@@ -34,7 +36,8 @@ import { Ng2FlatpickrModule } from 'ng2-flatpickr';
     AuthModule,
     PaginationModule,
     NgbModalModule,
-    Ng2FlatpickrModule
+    Ng2FlatpickrModule,
+    TimeAgoModule
   ],
   entryComponents: [
   ]

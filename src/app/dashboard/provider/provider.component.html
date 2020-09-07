@@ -1,35 +1,44 @@
-<h2 class="heading text-center">Smart Table</h2>
+<h2 class="heading text-center">All Accounts</h2>
 
-<h5 class="mt-4">Smart Table
+<h5 class="mt-4">Add account
 
   <button class="btn px-4 btn-social btn-twitter" [disabled]="isSubmitting" [class.spinner]="isSubmitting"
     (click)="twitterLogin()">
-    <span class="fa fa-twitter"></span> Sign in with Twitter
+    <span class="fa fa-twitter"></span> Twitter
   </button>
 
   <button class="btn px-4 btn-social btn-linkedin" [disabled]="isSubmitting" [class.spinner]="isSubmitting"
     (click)="linkedLogin()">
-    <span class="fa fa-linkedin"></span> Sign in with LinkIn
+    <span class="fa fa-linkedin"></span> LinkedIn
   </button>
 
 </h5>
 <div class="card">
-  <div class="card-body">
-    <table id="data_table" class="display table responsive no-wrap">
+  <div class="card-body table-responsive">
+    <table  class="table">
 
       <thead>
         <tr>
           <th scope="col">Name</th>
           <th scope="col">Type</th>
           <th scope="col">Created At</th>
+          <th scope="col">Expire At</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let provider of pageProvider?.providers;let i=index;">
           <th scope="row">{{provider.name}}</th>
-          <td>{{provider.providerType}}</td>
-          <td>{{provider.createdAt}}</td>
+          <td>
+            <span class="fa "
+            [ngClass]="{'fa-linkedin':provider.providerType==='LINKEDIN','fa-twitter':provider.providerType==='TWITTER'}"></span>
+            </td>
+          <td>
+            {{ provider.createdAt | timeAgo }}
+          </td>
+          <td>
+            {{provider.expireAt}}
+          </td>
           <td>
             <button class="btn  btn-just-icon btn-round btn-light" (click)="removeProvider(provider?.id,i)"><i
                 class="material-icons">delete</i></button>

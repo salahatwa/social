@@ -12,6 +12,7 @@ export interface ProviderDto {
     handle?: string;
     id?: string;
     image?: string;
+    expireAt?:string;
     name?: string;
     providerType?: ProviderDto.ProviderTypeEnum;
     secure?: boolean;
